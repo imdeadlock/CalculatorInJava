@@ -222,17 +222,19 @@ class Calculation {
 // main class to call the functions
 public class Calculator extends Calculation {
 
-    public static void main(String args[]) {
-        // Arithematic Calculation
+    //recursion function to run the program again if user wants to continue again
+    void recursion() {
         int op, no, singleNum, shape, base, exponent;
         float pie = (float) 3.14;
         float aq[], result, length, edge, height, breadth, area = 0, side, radius;
-        Calculator cal = new Calculator();
-        System.out.println("Hello, Welcome to The Calculator");
-        System.out.println(
-                "Enter 1 Standard Calculation\nEnter 2 for Mensuration\nEnter 3 for Arithmetic Progression (For n number)\nEnter 4 for Mean/Median/Mode");
-        System.out.print("Select Operation: ");
         Scanner obj = new Scanner(System.in);
+        Calculator cal = new Calculator();
+        //Start of the program
+        System.out.println("\n\nHello, Welcome to The Calculator");
+        System.out.println(
+                "\nEnter 1 Standard Calculation\nEnter 2 for Mensuration\nEnter 3 for Arithmetic Progression (For n number)\nEnter 4 for Mean/Median/Mode");
+        System.out.print("Select Operation: ");
+        //Selecting the operation to be performed
         op = obj.nextInt();
         switch (op) {
             case 1:
@@ -284,11 +286,11 @@ public class Calculator extends Calculation {
                         break;
                     case 7:
                         // Power
-                        Scanner ob1 = new Scanner(System.in);
+                        Scanner obj1 = new Scanner(System.in);
                         System.out.println("Enter the base: ");
-                        base = ob1.nextInt();
+                        base = obj1.nextInt();
                         System.out.println("Enter the exponent: ");
-                        exponent = ob1.nextInt();
+                        exponent = obj1.nextInt();
                         result = (float) Math.pow(base, exponent);
                         System.out.println("Result: " + result);
                         break;
@@ -317,44 +319,47 @@ public class Calculator extends Calculation {
                         System.out.println(
                                 "Enter 1 Rectangle/Parallelogram\nEnter 2 for Square\nEnter 3 for triangle\nEnter 4 for Circle");
                         shape = obj.nextInt();
-                        Scanner obj6 = new Scanner(System.in);
+                        Scanner obj2 = new Scanner(System.in);
                         switch (shape) {
                             case 1:
                                 System.out.print("Length: ");
-                                length = obj6.nextFloat();
+                                length = obj2.nextFloat();
                                 System.out.print("Breadth: ");
-                                breadth = obj6.nextFloat();
+                                breadth = obj2.nextFloat();
                                 area = length * breadth;
                                 System.out.println("Area of Rectangle : " + area);
                                 break;
                             case 2:
                                 System.out.print("Side: ");
-                                side = obj6.nextFloat();
+                                side = obj2.nextFloat();
                                 area = (side * side);
                                 System.out.println("Area of Square : " + area);
                                 break;
                             case 3:
                                 System.out.print("Length: ");
-                                length = obj6.nextFloat();
+                                length = obj2.nextFloat();
                                 System.out.print("Breadth: ");
-                                breadth = obj6.nextFloat();
+                                breadth = obj2.nextFloat();
                                 area = (length * breadth);
                                 area = (area * 1 / 2);
                                 System.out.println("Area of Triangle : " + area);
                                 break;
                             case 4:
                                 System.out.print("Radius: ");
-                                radius = obj6.nextFloat();
+                                radius = obj2.nextFloat();
                                 area = (pie * radius * radius);
                                 System.out.println("Area of Circle : " + area);
                                 break;
                             default:
-                                break;
+                                System.out.println("Please Enter a Valid Choice!!!!");
                         }
                     case 2:
                         // Surface area of 3D Sapes
                         cal.surfaceArea();
                         break;
+                    default:
+                        System.out.println("Please Enter a Valid Choice!!!!");
+
                 }
                 break;
             case 3:
@@ -383,8 +388,7 @@ public class Calculator extends Calculation {
                         System.out.print("Sum of Nth term : " + result);
                         break;
                     default:
-
-                        break;
+                        System.out.println("Please Enter a Valid Choice!!!!");
 
                 }
                 break;
@@ -417,8 +421,30 @@ public class Calculator extends Calculation {
                         result = modeFunction(aq, no);
                         System.out.println("Mode: " + result);
                         break;
+                    default:
+                        System.out.println("Please Enter a Valid Choice!!!!");
                 }
                 break;
+            default:
+                System.out.println("Please Enter a Valid Choice!!!!");
+                break;
         }
+        System.out.println("Do you want to continue (Y/N) : ");
+        char loop = obj.next().charAt(0);
+        if (loop == 'Y') {
+            recursion();
+        } else if (loop == 'y') {
+            recursion();
+        } else {
+            System.out.println("Thank you for using the program!!");
+        }
+
     }
+//Main method to call the function
+    public static void main(String args[]) {
+        Calculator obj = new Calculator();
+        //calling the recursion function to run the program again if user wants to continue again
+        obj.recursion();
+    }
+
 }
