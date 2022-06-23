@@ -1,5 +1,5 @@
 # CalculatorInJava
-This is a basic calculator for normal calculation build in Java Programming
+This is a basic calculator for normal calculation built in Java
 It includes operations like :
 
 Standard Operations (Addition, Multiplication, Factorial of a Number, Square root etc.)
