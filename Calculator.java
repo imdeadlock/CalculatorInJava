@@ -217,24 +217,63 @@ class Calculation {
         return maxValue;
     }
 
+    void binaryFunc(int decimal) {
+        int temp = decimal;
+        int binary = 0, i = 1, rem;
+        if (decimal < 0) {
+
+        }
+        while (decimal != 0) {
+            rem = decimal % 2;
+            decimal = decimal / 2;
+            binary = binary + (rem * i);
+            i = i * 10;
+        }
+        System.out.println(+temp + " into binary is equal to " + binary);
+    }
+
+    void octalFunc(int decimal) {
+        int temp = decimal;
+        int octal = 0, i = 1;
+        while (decimal != 0) {
+            int rem = decimal % 8;
+            decimal = decimal / 8;
+            octal = octal + (rem * i);
+            i = i * 10;
+        }
+        System.out.println(+temp + " into octal is equal to " + octal);
+    }
+
+    void hexadecimalFunc(int decimal) {
+        int temp = decimal, rem;
+        String hex = "";
+        char hexchars[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+        while (decimal != 0) {
+            rem = decimal % 16;
+            hex = hexchars[rem] + hex;
+            decimal = decimal / 16;
+        }
+        System.out.println(+temp + " into hexadecimal is equal to " + hex);
+    }
+
 }
 
 // main class to call the functions
 public class Calculator extends Calculation {
 
-    //recursion function to run the program again if user wants to continue again
+    // recursion function to run the program again if user wants to continue again
     void recursion() {
         int op, no, singleNum, shape, base, exponent;
-        float pie = (float) 3.14;
+        float pie = (float) 3.141592653589793238;
         float aq[], result, length, edge, height, breadth, area = 0, side, radius;
         Scanner obj = new Scanner(System.in);
         Calculator cal = new Calculator();
-        //Start of the program
+        // Start of the program
         System.out.println("\n\nHello, Welcome to The Calculator");
         System.out.println(
-                "\nEnter 1 Standard Calculation\nEnter 2 for Mensuration\nEnter 3 for Arithmetic Progression (For n number)\nEnter 4 for Mean/Median/Mode");
+                "\nEnter 1 Standard Calculation\nEnter 2 for Mensuration\nEnter 3 for Arithmetic Progression (For n number)\nEnter 4 for Mean/Median/Mode\nEnter 5 for Programming Calculation");
         System.out.print("Select Operation: ");
-        //Selecting the operation to be performed
+        // Selecting the operation to be performed
         op = obj.nextInt();
         switch (op) {
             case 1:
@@ -245,9 +284,11 @@ public class Calculator extends Calculation {
                 op = obj.nextInt();
                 switch (op) {
                     case 1:
-                        // Addition of numbers
-                        no = numberOfElements();// taking the size in different method
-                        aq = elementsInput(no);// taking elements of size defined array
+                        // Addition
+                        // taking the size in different method
+                        no = numberOfElements();
+                        // taking elements of size defined array
+                        aq = elementsInput(no);
                         result = additionFunc(no, aq);
                         System.out.println("Sum: " + result);
                         break;
@@ -259,22 +300,22 @@ public class Calculator extends Calculation {
                         System.out.println("Result :" + result);
                         break;
                     case 3:
-                        // Multiplication of numbers
+                        // Multiplication
                         no = numberOfElements();
                         aq = elementsInput(no);
                         result = multiplyFunc(no, aq);
                         System.out.println("Multiplication of the given numbers: " + result);
                         break;
                     case 4:
-                        // Dividing the numbers
+                        // Divide
                         no = numberOfElements();
                         aq = elementsInput(no);
                         result = divisonFunc(no, aq);
                         System.out.println("Result: " + result);
                         break;
                     case 5:
-                        // Percentage of given number
-                        no = numberOfElements();// taking the size in different method
+                        // Percentage
+                        no = numberOfElements();
                         result = percentageFunc();
                         System.out.println(result);
                         break;
@@ -309,9 +350,7 @@ public class Calculator extends Calculation {
                 System.out.print("\n\nSelect Operation: ");
                 System.out.println(
                         "\nEnter 1 for Area of 2D Shapes\nEnter 2 for Area of 3D Shapes");
-
                 op = obj.nextInt();
-
                 switch (op) {
                     case 1:
                         // Area Calculator
@@ -425,6 +464,32 @@ public class Calculator extends Calculation {
                         System.out.println("Please Enter a Valid Choice!!!!");
                 }
                 break;
+            case 5:
+                System.out.println(
+                        "Press 1 for Decimal to Binary\nPress 2 for Decimal to Octal\nPress 3 for Decimal to Hexadecimal");
+                System.out.println("Select Operation: ");
+                op = obj.nextInt();
+                int num;
+                switch (op) {
+                    case 1:
+                        System.out.print("Enter a numebr: ");
+                        num = obj.nextInt();
+                        cal.binaryFunc(num);
+                        break;
+                    case 2:
+                        System.out.print("Enter a numebr: ");
+                        num = obj.nextInt();
+                        cal.octalFunc(num);
+                        break;
+                    case 3:
+                        System.out.print("Enter a numebr: ");
+                        num = obj.nextInt();
+                        cal.hexadecimalFunc(num);
+                        break;
+                    default:
+                        System.out.println("Please Enter a Valid Choice!!");
+                }
+                break;
             default:
                 System.out.println("Please Enter a Valid Choice!!!!");
                 break;
@@ -440,10 +505,11 @@ public class Calculator extends Calculation {
         }
 
     }
-//Main method to call the function
+
+    // Main method to call the function
     public static void main(String args[]) {
         Calculator obj = new Calculator();
-        //calling the recursion function to run the program again if user wants to continue again
+        // calling the recursion function to run the program again if user wants to continue again
         obj.recursion();
     }
 
