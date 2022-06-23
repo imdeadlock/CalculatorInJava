@@ -256,6 +256,24 @@ class Calculation {
         System.out.println(+temp + " into hexadecimal is equal to " + hex);
     }
 
+    float varianceFunc(float[] aq, float mean, int size) {
+        float x[] = new float[size];
+        float x2[] = new float[size];
+        float sum=0,variance;
+        for (int i = 0; i < size; i++) {
+            x[i] = aq[i] - mean;//(x-mean)
+            x2[i] = x[i] * x[i];//(x-mean)^2
+            sum = sum + x2[i];//Σ(x-mean)^2
+        }
+        variance=sum/size;//Σ(x-mean)^2/size
+        return variance;
+    }
+    float standardDeviationFunc(float variance){
+        float standardDeviation;
+        standardDeviation=(float) Math.sqrt(variance);
+        return standardDeviation;
+    }
+
 }
 
 // main class to call the functions
@@ -271,7 +289,7 @@ public class Calculator extends Calculation {
         // Start of the program
         System.out.println("\n\nHello, Welcome to The Calculator");
         System.out.println(
-                "\nEnter 1 Standard Calculation\nEnter 2 for Mensuration\nEnter 3 for Arithmetic Progression (For n number)\nEnter 4 for Mean/Median/Mode\nEnter 5 for Programming Calculation");
+                "\nEnter 1 Standard Calculation\nEnter 2 for Mensuration\nEnter 3 for Arithmetic Progression (For n number)\nEnter 4 for Statistical Calculation (Ungrouped Data)\nEnter 5 for Programming Calculation");
         System.out.print("Select Operation: ");
         // Selecting the operation to be performed
         op = obj.nextInt();
@@ -424,15 +442,16 @@ public class Calculator extends Calculation {
                         System.out.println("Size: " + arithmeticProgressin[2]);
                         result = arithmeticProgressin[2] / 2 * (2 * arithmeticProgressin[0]
                                 + ((arithmeticProgressin[2] - 1) * arithmeticProgressin[1]));
-                        System.out.print("Sum of Nth term : " + result);
+                        System.out.print("\nSum of Nth term : " + result);
                         break;
                     default:
-                        System.out.println("Please Enter a Valid Choice!!!!");
+                        System.out.println("\n\nPlease Enter a Valid Choice!!!!");
 
                 }
                 break;
             case 4:
-                System.out.println("Press 1 for Mean\nPress 2 for Median\nPress 3 for Mode");
+                System.out.println(
+                        "Press 1 for Mean\nPress 2 for Median\nPress 3 for Mode\nPress 4 for Variance\nPress 5 for Standard Deviation\n");
                 System.out.println("Select Operation: ");
                 op = obj.nextInt();
                 switch (op) {
@@ -440,7 +459,7 @@ public class Calculator extends Calculation {
                         no = numberOfElements();
                         aq = elementsInput(no);
                         result = meanFunction(aq, no);
-                        System.out.println("Mean of Given Numbers : " + result);
+                        System.out.println("Mean : " + result);
                         break;
                     case 2:
                         int median;
@@ -448,17 +467,32 @@ public class Calculator extends Calculation {
                         aq = elementsInput(no);
                         if (no % 2 == 0) {
                             median = no / 2;
-                            System.out.println("Median of the given numbers : " + aq[median - 1]);
+                            System.out.println("Median : " + aq[median - 1]);
                         } else {
                             median = ((no / 2) + ((no / 2) + 1)) / 2;
-                            System.out.println("Median of the given numbers: " + aq[median - 1]);
+                            System.out.println("Median : " + aq[median - 1]);
                         }
                         break;
                     case 3:
                         no = numberOfElements();
                         aq = elementsInput(no);
                         result = modeFunction(aq, no);
-                        System.out.println("Mode: " + result);
+                        System.out.println("\n\nMode : " + result);
+                        break;
+                    case 4:
+                        no = numberOfElements();
+                        aq = elementsInput(no);
+                        float mean = meanFunction(aq, no);
+                        result=varianceFunc(aq, mean, no);
+                        System.out.println("\n\nVariance : "+result);
+                        break;
+                    case 5:
+                        no = numberOfElements();
+                        aq = elementsInput(no);
+                        mean = meanFunction(aq, no);
+                        float variance=varianceFunc(aq, mean, no);
+                        result=standardDeviationFunc(variance);
+                        System.out.println("\n\nStandard Deviation: "+result);
                         break;
                     default:
                         System.out.println("Please Enter a Valid Choice!!!!");
@@ -509,7 +543,8 @@ public class Calculator extends Calculation {
     // Main method to call the function
     public static void main(String args[]) {
         Calculator obj = new Calculator();
-        // calling the recursion function to run the program again if user wants to continue again
+        // calling the recursion function to run the program again if user wants to
+        // continue again
         obj.recursion();
     }
 
